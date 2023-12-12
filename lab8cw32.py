@@ -106,7 +106,7 @@ for i,j,k in zip(['Opornik 1', 'Opornik 2', 'Opornik 3', 'Oporniki 1, 2 szeregow
     opory[k]=slope
     bledy[k]=Dslope
    
-#plt.show()
+plt.show()
 
 # SUMY OKRESLONYCH OPORÓW
 print("\nOpory zastępcze określonyc połączeń:")
