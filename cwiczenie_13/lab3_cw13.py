@@ -69,7 +69,7 @@ print("\n1. seria pomiarowa:")
 # numer rzeczywistego roztworu
 i_rzezcz = 0
 # szukanie gęstości
-print("Różnica eta wyliczonego i tablicowego dla roztworów:")
+print("Różnica eta wyliczonego i tablicowego dla roztworów\n[%, rho, eta tabl., eta obl., Różnica eta]:")
 for i in range(31):
     x = np.array(d*(1 + 2.4*d/D) / (m - rho_wzr[i]*mh.pi*d**3/6),dtype=float)
     y = np.array(g*t/(3*mh.pi*l))
@@ -145,6 +145,11 @@ D_eta = results.bse[0]
 D_eta = round(D_eta, 4)
 print("Eta = (" + str(eta) + " ± " + str(D_eta) + ")Pa*s" )
 
+# Wyniki dla poszczegółnych pomiarów
+eta_wyn=g*t*( m - 1/6* rho_wzr[i] *mh.pi*d**3) / ( 3*mh.pi*l*d*( 1 + 2.4*d/D ) )
+print("Eta dla poszczególnych pomiarów\n[nr, eta]:")
+for i in range(10):
+    print(str(i+1) + " " + str(round(eta_wyn[i], 3)))
 
 # 2. seria
 print("\n2. seria pomiarowa:")
@@ -155,11 +160,11 @@ t2 = np.array(balldata2[:]["t[s]"])
 # numer rzeczywistego roztworu
 i_rzezcz2 = 0
 # szukanie gęstości
-print("Różnica eta wyliczonego i tablicowego dla roztworów:")
+print("Różnica eta wyliczonego i tablicowego dla roztworów\n[%, rho, eta tabl., eta obl., Różnica eta]:")
 for i in range(31):
-    eta_wyn=g*t2*( m2 - 1/6* rho_wzr[i] *mh.pi*d2**3) / ( 3*mh.pi*l*d2*( 1 + 2.4*d2/D ) )
-    #print("Tablica 2. seria: " + str(eta_wyn))
-    eta2 = np.mean(eta_wyn)
+    eta_wyn2=g*t2*( m2 - 1/6* rho_wzr[i] *mh.pi*d2**3) / ( 3*mh.pi*l*d2*( 1 + 2.4*d2/D ) )
+    #print("Tablica 2. seria: " + str(eta_wyn2))
+    eta2 = np.mean(eta_wyn2)
     #print(str(eta) + " " + str(eta_wzr[i]))
     rozt_rozn[i] = abs(eta2 - eta_wzr[i])
     rozt_rozn[i] = round(rozt_rozn[i], 3)
@@ -178,13 +183,19 @@ D_rho2 = (rho_wzr[i_rzezcz2+1] - rho_wzr[i_rzezcz2-1])/2
 D_rho2 = round(D_rho2, 3)
 print("Niepewność gęstości: " + str(D_rho) + " kg/m^3")
 
-eta_wyn=g*t2*( m2 - 1/6* rho2 *mh.pi*d2**3) / ( 3*mh.pi*l*d2*( 1 + 2.4*d2/D ) )
-eta2 = np.mean(eta_wyn)
+eta_wyn2=g*t2*( m2 - 1/6* rho2 *mh.pi*d2**3) / ( 3*mh.pi*l*d2*( 1 + 2.4*d2/D ) )
+eta2 = np.mean(eta_wyn2)
 eta2 = round(eta2, 4)
 
-D_eta2 = np.std(eta_wyn)
+D_eta2 = np.std(eta_wyn2)
 D_eta2 = round(D_eta2, 3)
 print("Eta = (" + str(eta2) + " ± " + str(D_eta2) + ")Pa*s" )
+
+# Wyniki dla poszczegółnych pomiarów
+print("Eta dla poszczególnych pomiarów\n[nr, eta]:")
+for i in range(10):
+    print(str(i+10) + " " + str(round(eta_wyn2[i], 3)))
+
 
 
 # 3. seria
@@ -194,7 +205,7 @@ m3 = np.array(balldata3[:]["m[kg]"])
 t3 = np.array(balldata3[:]["t[s]"])
 h3 = np.array(balldata3[:]["h[m]"])
 
-print("Współczynnik lepkosci w zalezności od głębokości:")
+print("Współczynnik lepkosci w zalezności od głębokości\n[h, eta]:")
 eta_wyn3=g*t3*( m3 - 1/6* rho *mh.pi*d3**3) / ( 3*mh.pi*l*d3*( 1 + 2.4*d3/D ) )
 
 for i in range(10):
